@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Vault — Creator Courses</title>
+<meta name="description" content="A plataforma de cursos do criador. Vídeos e fotos do conteúdo, sem enrolação." />
+<meta name="theme-color" content="#0B0B0B" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+<link rel="preconnect" href="https://fonts.cdnfonts.com" />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.cdnfonts.com/css/azonix" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<style>
+  :root {
+    --black: #0A0A0A;
+    --black-2: #161616;
+    --red: #FF2E82;
+    --red-dark: #C2185B;
+    --orange: #FF7AB0;
+    --orange-light: #FFB6D5;
+    --bg: #FDEFF5;
+    --bg2: #FCE4EF;
+    --text: #171717;
+    --text-light: #6E6E6E;
+    --white: #ffffff;
+    --radius: 14px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    --shadow-lg: 0 10px 44px rgba(0,0,0,0.20);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'Work Sans',sans-serif; color:var(--text); background:var(--bg);
+    -webkit-font-smoothing:antialiased; line-height:1.5; position:relative;
+  }
+  body::before{ content:''; position:fixed; inset:0; z-index:-1; pointer-events:none; background:
+    radial-gradient(600px circle at 8% 10%, rgba(255,46,130,.16), transparent 60%),
+    radial-gradient(640px circle at 90% 85%, rgba(10,10,10,.10), transparent 60%); }
+  h1,h2,h3,h4{ font-family:'Montserrat',sans-serif; font-weight:800; letter-spacing:.02em; text-transform:uppercase; }
+  a{ text-decoration:none; color:inherit; }
+  img{ max-width:100%; display:block; }
+  button{ font-family:inherit; -webkit-tap-highlight-color:transparent; cursor:pointer; }
+  .gold-rule{ width:44px; height:3px; background:linear-gradient(90deg,var(--red),var(--orange)); border-radius:2px; margin-bottom:12px; }
+
+  /* placeholder de media */
+  .ph{ position:relative; background:linear-gradient(135deg,var(--black) 0%, var(--red-dark) 55%, var(--red) 100%); display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; }
+  .ph::before{ content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.08) 0, rgba(255,255,255,.08) 2px, transparent 2px, transparent 14px); }
+  .ph::after{ content:''; position:absolute; top:-30%; left:-25%; width:55%; height:170%; background:linear-gradient(120deg, rgba(255,255,255,.14), rgba(255,255,255,0) 65%); transform:rotate(18deg); pointer-events:none; }
+  .ph i{ position:relative; z-index:1; color:rgba(255,255,255,.6); font-size:1.3rem; }
+  .ph-label{ position:absolute; bottom:6px; left:7px; z-index:1; font-size:.56rem; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.75); background:rgba(0,0,0,.4); padding:2px 7px; border-radius:20px; backdrop-filter:blur(3px); }
+
+  /* PAGE */
+  .page{ max-width:480px; margin:0 auto; min-height:100vh; }
+
+  /* HEADER */
+  header{ position:sticky; top:0; z-index:50; background:linear-gradient(150deg,var(--black) 0%, var(--black-2) 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 8px 32px rgba(0,0,0,.35); }
+  .brand{ display:flex; align-items:center; gap:12px; padding:18px 18px 14px; border-bottom:1px solid rgba(255,255,255,.10); }
+  .brand-mark{ width:42px; height:42px; border-radius:10px; background:linear-gradient(135deg,var(--red),var(--orange)); border:1px solid rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; color:var(--white); font-family:'Anton',sans-serif; font-weight:400; font-size:1.4rem; flex-shrink:0; box-shadow:0 4px 14px rgba(255,46,130,.40); }
+  .brand-name{ display:flex; flex-wrap:wrap; column-gap:8px; font-family:'Azonix','Anton',sans-serif; font-weight:400; font-size:1.55rem; line-height:1.05; letter-spacing:.03em; }
+  .brand-name .w-vault{ color:var(--red); text-shadow:0 2px 12px rgba(255,46,130,.45); }
+  .brand-name .w-prime{ color:var(--white); }
+  .brand-tag{ font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-top:5px; }
+
+  .tabs{ display:flex; flex-wrap:wrap; gap:6px; padding:12px 14px 14px; }
+  .tab{ flex:0 0 auto; padding:6px 11px; border-radius:6px; border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.05); color:rgba(255,255,255,.7); font-weight:700; font-size:.6rem; letter-spacing:.03em; text-transform:uppercase; white-space:nowrap; transition:all .2s; }
+  .tab:hover{ color:var(--white); border-color:var(--orange); }
+  .tab.active{ background:linear-gradient(120deg,var(--red),var(--orange)); border-color:transparent; color:var(--white); }
+
+  /* CATEGORY */
+  .cat-section{ padding:30px 18px 4px; }
+  .cat-head{ margin-bottom:18px; }
+  .cat-title{ font-size:1.6rem; font-weight:800; color:var(--black); letter-spacing:.04em; }
+
+  /* COURSE CARD */
+  .course{ background:rgba(255,255,255,.7); border:1px solid rgba(0,0,0,.06); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px 16px 16px; margin-bottom:22px; content-visibility:auto; contain-intrinsic-size:0 620px; }
+  .course-title{ font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:800; color:var(--text); letter-spacing:.03em; line-height:1.2; margin-bottom:10px; }
+
+  .media-row{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+  .media-block{ aspect-ratio:1/1; border-radius:9px; }
+  .media-row .media-block{ aspect-ratio:3/4; }
+  .media-block.video i{ font-size:2rem; }
+
+  .media-single{ margin:0 auto 8px; max-width:58%; }
+  .media-single .media-block{ aspect-ratio:16/10; }
+
+  .course-meta{ display:flex; align-items:center; gap:8px; margin:12px 0 14px; flex-wrap:wrap; }
+  .meta-tag{ display:inline-flex; align-items:center; gap:6px; font-size:.68rem; font-weight:600; color:var(--text-light); background:rgba(0,0,0,.04); border:1px solid rgba(0,0,0,.06); border-radius:6px; padding:4px 10px; }
+  .meta-tag i{ color:var(--red); font-size:.72rem; }
+
+  .buy-btn{ width:100%; background:linear-gradient(120deg,var(--red),var(--orange)); color:var(--white); font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:13px 18px; border-radius:6px; font-size:.82rem; border:none; display:flex; align-items:center; justify-content:center; gap:9px; box-shadow:0 6px 22px rgba(255,46,130,.40); transition:filter .2s, transform .2s; }
+  .buy-btn:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+  .buy-btn .price{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:1rem; }
+
+  footer{ padding:36px 18px 50px; text-align:center; }
+  footer .foot-brand{ display:flex; flex-wrap:wrap; justify-content:center; column-gap:8px; font-family:'Azonix','Anton',sans-serif; font-weight:400; font-size:1.25rem; margin-bottom:8px; letter-spacing:.03em; }
+  footer .foot-brand .w-vault{ color:var(--red-dark); }
+  footer .foot-brand .w-prime{ color:var(--black); }
+  footer p{ font-size:.76rem; color:var(--text-light); max-width:320px; margin:0 auto; }
+
+  .media-block video, .media-block img.real{ width:100%; height:100%; object-fit:cover; border-radius:9px; }
+  .media-block video{ cursor:pointer; background:#000; }
+
+  @media (max-width:340px){
+    .media-row{ gap:6px; }
+    .course-title{ font-size:.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div>
+        <div class="brand-name"><span class="w-vault">PRIME</span><span class="w-prime">CONTENT 🔞</span></div>
+        <div class="brand-tag">Exclusive, high-quality content</div>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+  </header>
+
+  <main id="feed"></main>
+
+  <footer>
+    <div class="foot-brand"><span class="w-vault">PRIME</span><span class="w-prime">CONTENT 🔞</span></div>
+    <p>All content is digital. Secure checkout — immediate access after payment.</p>
+  </footer>
+
+</div>
+
+<script>
+/* ============================================================
+   1) CATEGORIAS (as "tabs")
+   ============================================================ */
+const CATEGORIES = [
+  { id:"marketing", name:"CP" },
+  { id:"design",    name:"FATHERDAUGHTER" },
+  { id:"code",       name:"MOMSON" },
+  { id:"finance",   name:"GAY" },
+  { id:"music",     name:"TEENAGE" },
+];
+
+/* ============================================================
+   2) PACKS (7 por categoria)
+   - videos: array com ATÉ 2 itens { src:"", label:"" }
+       src vazio  -> placeholder de vidro
+       src preenchido -> ao clicar reproduz o vídeo real (mp4/webm)
+   - photo: { src:"", label:"" } — 1 foto por pack
+       src vazio  -> placeholder
+       src preenchido -> mostra a foto real
+   - size: texto livre, ex: "1.2 GB"
+   - price: texto livre, ex: "$25"
+   - contact.type: "whatsapp" | "telegram" | "messenger" | "instagram" | "email" | "checkout"
+   - contact.value:
+        whatsapp   -> número com código do país, ex: "15551234567"
+        telegram   -> username sem @, ex: "mychannel"
+        messenger  -> username da página, ex: "vaultcourses"
+        instagram  -> username, ex: "vault.courses"
+        email      -> endereço de email
+        checkout   -> link de pagamento direto (Stripe, PayPal, etc.)
+   ============================================================ */
+const COURSES = [
+  {
+    category:"marketing", title:"PACK FOLDER 1",
+    size:"80.6 GB", price:"$30",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789046305641-5d94e49a-80db-4b32-92db-c3f1ea6c757f.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789045955139-5763369c-b8df-47bc-9c43-1a108f36d837.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://files.catbox.moe/qg2fi5.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"marketing", title:"PACK FOLDER 2",
+    size:"72.9 GB", price:"",
+    videos:[ { src:"https://files.catbox.moe/fv2wuz.webm", label:"Preview 1" }, { src:"https://files.catbox.moe/72xdc6.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://files.catbox.moe/qg2fi5.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"marketing", title:"PACK FOLDER 3",
+    size:"85.2 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789124862677-6c81cec4-72a8-4887-808c-44e6fc577661.mp4", label:"Preview 1" }, { src:"https://files.catbox.moe/y7grts.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://files.catbox.moe/qg2fi5.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"marketing", title:"PACK FOLDER 4",
+    size:"55.8 GB", price:"",
+    videos:[ { src:"https://files.catbox.moe/df9umr.mp4", label:"Preview 1" }, { src:"https://files.catbox.moe/iunl79.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://files.catbox.moe/qg2fi5.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"marketing", title:"PACK FOLDER 5",
+    size:"60 GB", price:"",
+    videos:[ { src:"https://files.catbox.moe/x8tiik.mp4", label:"Preview 1" }, { src:"https://files.catbox.moe/5shslo.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://files.catbox.moe/qg2fi5.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"marketing", title:"PACK FOLDER 6",
+    size:"63.1 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789046865664-cc6553f0-3002-4de4-940d-8c525f8dd9da.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789046935831-aa5d9172-6766-4ca2-aedf-b935bb457b9f.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://files.catbox.moe/qg2fi5.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"marketing", title:"CP All-ACCESS MEGA FOLDER COLLECTION",
+    size:"1.9 TB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789058690095-33910ac6-7e06-48ee-baac-ac8092fe8061.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789058815844-d7e31292-45c0-460d-9e30-990106d45e98.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://files.catbox.moe/qg2fi5.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"design", title:"PACK FOLDER 1",
+    size:"70.6 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789046988658-15b8688b-44fd-4ed7-95e0-e06efc442243.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789047238695-2a63a92e-4e86-4d74-9960-4a2166a35f3a.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789126093052-8191e54a-6fb4-4bf6-be33-630491940656.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"design", title:"PACK FOLDER 2",
+    size:"82.9 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789047617809-2f8eecab-e318-4f72-8193-bc8835d6cb53.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789047690489-9cc3d03a-3341-4415-91bb-533bf0feacbe.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789126093052-8191e54a-6fb4-4bf6-be33-630491940656.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"design", title:"PACK FOLDER 3",
+    size:"75.2 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789047751282-a30ea955-9f10-47eb-aea3-92610c935d96.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789047811549-1310373a-e817-442f-9e3f-85a0df19b96c.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789126093052-8191e54a-6fb4-4bf6-be33-630491940656.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"design", title:"PACK FOLDER 4",
+    size:"95.8 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789047861572-cb851081-4076-44aa-ae5d-606a7cf1f4fc.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789047081339-d8dd65ad-fb7d-41ea-813a-162116576244.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789126093052-8191e54a-6fb4-4bf6-be33-630491940656.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"design", title:"PACK FOLDER 5",
+    size:"80.5 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789126549115-2bc02f1d-7cf3-4da1-869f-cc50c6773914.mp4", label:"Preview 1" }, { src:"https://files.catbox.moe/y7grts.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789126093052-8191e54a-6fb4-4bf6-be33-630491940656.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"design", title:"PACK FOLDER 6",
+    size:"73.1 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789047153283-cd98a297-1bf1-409f-9aaf-bf5a7b27641b.mp4", label:"Preview 1" }, { src:"https://files.catbox.moe/iunl79.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789126093052-8191e54a-6fb4-4bf6-be33-630491940656.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"design", title:"FATHER DAUGHTER All-ACCESS MEGA FOLDER COLLECTION",
+    size:"1 TB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789047960326-770f454d-bf46-48c5-9d6a-04c6f65b5df9.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789049778219-d174f514-c170-4d67-a61b-80aac33604d8.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789126093052-8191e54a-6fb4-4bf6-be33-630491940656.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"code", title:"PACK FOLDER 1",
+    size:"70.6 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789052261003-514189fc-16f1-47c6-b6af-b660bbc67f1a.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789052313533-c5494359-f36f-4d0b-add3-4e0a4a0c7899.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"code", title:"PACK FOLDER 2",
+    size:"90.9 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789050972211-0d30dadc-6cc1-496b-9ce8-aae7781b96a1.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789051027214-1b899adc-240e-45ee-99e6-bb54644b987c.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"code", title:"PACK FOLDER 3",
+    size:"85.2 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789051833221-bf6090c9-14e5-449b-8f4e-15dc4b61817e.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789051683999-28909c9a-0d69-4328-882c-65aab925cb0f.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"code", title:"PACK FOLDER 4",
+    size:"70.8 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789051925207-d753a401-c919-4493-9634-7c28cfd0c894.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789052102166-79ff8ae4-0b8a-4274-9c26-2086851ce098.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"code", title:"PACK FOLDER 5",
+    size:"90 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789056387399-eab734d8-1124-4251-8831-17008c89ae22.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789056498756-9bd522c5-6d44-4c27-8f1f-0bc3d84055db.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"code", title:"PACK FOLDER 6",
+    size:"63.1 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789051967793-68d4b14a-9ef7-4d68-b64d-0beebc4245b8.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789056333283-b7f8fd8d-36c9-4e39-a6c1-1614b39f20f2.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"code", title:"MOMSON All-ACCESS MEGA FOLDER COLLECTION",
+    size:"1.5 TB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789057643245-984a8561-c3a3-42d0-a2b9-a7e7d023d951.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789057687396-879905d3-31f5-473d-8ac8-83f41bfd4033.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"finance", title:"PACK FOLDER 1",
+    size:"80.6 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789128015388-e02c91a5-a7fb-41af-9c33-4f0f015462d5.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789128088014-ff696c89-8d2e-4113-a4f9-39984a59dccb.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"finance", title:"PACK FOLDER 2",
+    size:"52.9 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789128327216-fc71a117-7fd8-4903-a650-db6e8e5a14b5.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789128386350-2fe6b5da-43b2-4eff-a454-18023931ba61.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"finance", title:"PACK FOLDER 3",
+    size:"55.2 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789128464411-3a2e52d7-3ff4-47a1-9e3c-fbca0a2564ef.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789128540616-16a98525-2ae6-4d91-97ea-ddb1d53b30ab.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"finance", title:"PACK FOLDER 4",
+    size:"95.8 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789128540616-16a98525-2ae6-4d91-97ea-ddb1d53b30ab.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789129100387-efe89e4e-01af-463b-b64c-9fd2a99ffcf0.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"finance", title:"PACK FOLDER 5",
+    size:"65.8 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789129211458-07d53033-a08e-4cc3-809e-2cd4c77570b6.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789129330557-7a4b3f4f-a0eb-40e2-acd6-9e9333d06447.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"finance", title:"PACK FOLDER 6",
+    size:"63.1 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789129634458-11735526-5f50-42cd-a2d4-a91fd929758a.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789129801225-2dd39d84-f673-4e88-abc5-a2cf431dd3a0.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"finance", title:"GAY All-ACCESS MEGA FOLDER COLLECTION",
+    size:"1.5 TB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789129862395-d9ac6781-c7e8-4c66-9d36-969662465fd3.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789129897402-0e94decd-1fe2-46c0-8ab2-b9c7dce2e881.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789127103280-1ad2ad5f-f6cd-4a1a-92f0-4bc9ce6d4b97.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"music", title:"PACK FOLDER 1",
+    size:"100 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789054940381-2abe287f-98d1-4aaa-adc2-484dfef4379b.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789055538305-33541a0f-68dd-4908-a4ab-d56460687098.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789130131502-51406bf2-97e9-448f-b1e0-a7d763a5e26d.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"music", title:"PACK FOLDER 2",
+    size:"150 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789055642570-08d8d683-c3ba-43b7-bebd-41dcbfc90d27.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789130238456-b7c51afe-c967-46ca-889a-b17931a2a4d1.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789130131502-51406bf2-97e9-448f-b1e0-a7d763a5e26d.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"music", title:"PACK FOLDER 3",
+    size:"85.5 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789130332054-6e26983c-968c-4d91-8ce6-d5aa5f869d82.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789130492489-9c67c2b2-9d0d-4c11-99c1-3ab668a45812.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789130131502-51406bf2-97e9-448f-b1e0-a7d763a5e26d.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"music", title:"PACK FOLDER 4",
+    size:"95.8 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789130544022-9f870d70-d06f-4bea-99a2-52090485d990.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789130839435-8472cb30-d8ac-4e24-b8dc-13c37701c29d.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789130131502-51406bf2-97e9-448f-b1e0-a7d763a5e26d.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"music", title:"PACK FOLDER 5",
+    size:"80.5 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789130913490-418c6058-deee-4b17-ada8-b9e49303d956.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789130971501-703d8c41-aca3-41df-8d39-0ca066e351ca.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789130131502-51406bf2-97e9-448f-b1e0-a7d763a5e26d.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"music", title:"PACK FOLDER 6",
+    size:"90.8 GB", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789131166597-3056cbdb-a398-48f9-887d-51ee05183145.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789131214758-0749f283-7bea-4b41-ab93-7e3d13a466ad.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789130131502-51406bf2-97e9-448f-b1e0-a7d763a5e26d.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  },
+  {
+    category:"music", title:"TEENAGES All-ACCESS MEGA FOLDER COLLECTION",
+    size:"2 tb", price:"",
+    videos:[ { src:"https://www.image2url.com/r2/default/videos/1789131457076-45aac6fa-a7dd-431d-8517-26477125dc3c.mp4", label:"Preview 1" }, { src:"https://www.image2url.com/r2/default/videos/1789131508354-2636bb9e-be36-46c1-b25f-fc7a3b66969f.mp4", label:"Preview 2" } ],
+    photo:{ src:"https://www.image2url.com/r2/default/files/1789130131502-51406bf2-97e9-448f-b1e0-a7d763a5e26d.png", label:"Photo" },
+    contact:{ type:"checkout", value:"http://t.me/nhinishop" }
+  }
+];
+/* ============================================================
+   Motor — não é preciso tocar em nada abaixo desta linha
+   ============================================================ */
+function buildLink(course){
+  const msg = `Olá! Quero comprar o pack "${course.title}" por ${course.price}.`;
+  const enc = encodeURIComponent(msg);
+  const c = course.contact;
+  switch(c.type){
+    case "whatsapp":  return `https://wa.me/${c.value}?text=${enc}`;
+    case "telegram":  return `https://t.me/${c.value}?text=${enc}`;
+    case "messenger": return `https://m.me/${c.value}`;
+    case "instagram": return `https://ig.me/m/${c.value}`;
+    case "email":     return `mailto:${c.value}?subject=${encodeURIComponent('Compra: '+course.title)}&body=${enc}`;
+    case "checkout":  return c.value;
+    default:          return "#";
+  }
+}
+function contactIcon(type){
+  return { whatsapp:"fa-brands fa-whatsapp", telegram:"fa-brands fa-telegram", messenger:"fa-brands fa-facebook-messenger",
+           instagram:"fa-brands fa-instagram", email:"fa-solid fa-envelope", checkout:"fa-solid fa-lock" }[type] || "fa-solid fa-arrow-right";
+}
+
+function videoBlockHTML(item, idx){
+  const label = item.label || `Preview ${idx+1}`;
+  if(item.src){
+    // data-src em vez de src: só carrega quando o vídeo entra no ecrã (ver lazyLoadMedia)
+    return `
+    <div class="media-block video">
+      <video data-src="${item.src}" loop muted playsinline preload="none" aria-label="${label}"></video>
+    </div>`;
+  }
+  return `
+    <div class="media-block video ph" role="button" tabindex="0" aria-label="${label}">
+      <i class="fa-solid fa-circle-play"></i>
+      <span class="ph-label">${label}</span>
+    </div>`;
+}
+function photoBlockHTML(item){
+  const label = item.label || "Photo";
+  if(item.src){
+    return `
+    <div class="media-block">
+      <img class="real" src="${item.src}" alt="${label}" loading="lazy" decoding="async" />
+    </div>`;
+  }
+  return `
+    <div class="media-block ph" role="img" aria-label="${label}">
+      <i class="fa-solid fa-image"></i>
+      <span class="ph-label">${label}</span>
+    </div>`;
+}
+
+function courseHTML(course){
+  const videos = (course.videos || []).slice(0,2);
+  return `
+    <div class="course">
+      <div class="course-title">${course.title}</div>
+      <div class="gold-rule"></div>
+
+      <div class="media-row videos">${videos.map(videoBlockHTML).join("")}</div>
+      <div class="media-single">${photoBlockHTML(course.photo)}</div>
+
+      <div class="course-meta">
+        <span class="meta-tag"><i class="fa-solid fa-database"></i>${course.size}</span>
+        <span class="meta-tag"><i class="fa-solid fa-bolt"></i>All content is digital. Secure checkout — immediate access after payment.</span>
+      </div>
+
+      <button class="buy-btn" onclick="window.open('${buildLink(course)}','_blank')">
+        <i class="${contactIcon(course.contact.type)}"></i> BUY NOW — <span class="price">${course.price}</span>
+      </button>
+    </div>`;
+}
+
+function render(activeCatId){
+  const tabsEl = document.getElementById("tabs");
+  tabsEl.innerHTML = CATEGORIES.map(c =>
+    `<button class="tab ${c.id===activeCatId?'active':''}" data-cat="${c.id}">${c.name}</button>`
+  ).join("");
+  tabsEl.querySelectorAll(".tab").forEach(btn=>{
+    btn.addEventListener("click", ()=> render(btn.dataset.cat));
+  });
+
+  const feed = document.getElementById("feed");
+  const catCourses = COURSES.filter(c=>c.category===activeCatId);
+  const cat = CATEGORIES.find(c=>c.id===activeCatId);
+
+  feed.innerHTML = `
+    <section class="cat-section">
+      <div class="cat-head"><h2 class="cat-title">${cat.name}</h2></div>
+      ${catCourses.map(courseHTML).join("")}
+    </section>`;
+
+  activateVideos();
+}
+
+/* Vídeos com src real: só carregam e tocam (autoplay, loop, sem som)
+   quando entram no ecrã. Ao sair do ecrã, pausam e libertam o buffer.
+   Isto evita que dezenas de vídeos toquem ao mesmo tempo e travem o site.
+   Clique liga/desliga o som. */
+let videoObserver = null;
+function activateVideos(){
+  const videos = document.querySelectorAll(".media-block.video video[data-src]");
+
+  if(videoObserver) videoObserver.disconnect();
+  videoObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const video = entry.target;
+      if(entry.isIntersecting){
+        if(!video.src && video.dataset.src) video.src = video.dataset.src;
+        video.play().catch(()=>{});
+      } else {
+        video.pause();
+      }
+    });
+  }, { rootMargin: "200px 0px", threshold: 0.25 });
+
+  videos.forEach(video=>{
+    videoObserver.observe(video);
+    video.addEventListener("click", function(){
+      video.muted = !video.muted;
+    });
+  });
+}
+
+render(CATEGORIES[0].id);
+</script>
+
+</body>
+</html>
